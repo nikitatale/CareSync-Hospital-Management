@@ -52,7 +52,7 @@ const Sidebar = () => {
               <p className="text-[10px] text-slate-500 font-medium mt-0.5">Hospital Management</p>
             </div>
           </div>
-          <button onClick={() => setMobileMenu(false)}
+          <button aria-label="Close menu" onClick={() => setMobileMenu(false)}
             className="lg:hidden text-slate-400 hover:text-white p-1">
             <XIcon size={18}/>
           </button>
@@ -139,7 +139,7 @@ const Sidebar = () => {
   return (
     <>
       
-      <button onClick={() => setMobileMenu(true)}
+      <button aria-label="Open menu" onClick={() => setMobileMenu(true)}
         className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg shadow-lg"
         style={{ background: "#0b1f1a", border: "1px solid rgba(255,255,255,0.08)" }}>
         <MenuIcon size={18} className="text-white"/>
