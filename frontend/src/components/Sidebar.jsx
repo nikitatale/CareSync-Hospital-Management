@@ -25,7 +25,7 @@ const Sidebar = () => {
   const navItems = [
     { name: "Dashboard",  href: "/dashboard", icon: LayoutGridIcon },
     role === "ADMIN"
-      ? { name: "Staff",      href: "/staff",      icon: UserIcon }
+      ? { name: "Staff",      href: "/staffs",      icon: UserIcon }
       : { name: "Attendance", href: "/attendance",  icon: CalendarIcon },
     { name: "Leave",     href: "/leave",     icon: FileTextIcon },
     { name: "Payslips",  href: "/payslips",  icon: DollarSignIcon },
