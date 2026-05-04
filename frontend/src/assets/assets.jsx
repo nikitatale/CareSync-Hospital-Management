@@ -13,20 +13,20 @@ export const DEPARTMENTS = [
 
 export const dummyAdminDashboardData = {
     role: "ADMIN",
-    totalEmployees: 3,
+    totalStaff: 3,
     totalDepartments: 10,
     todayAttendance: 1,
     pendingLeaves: 1,
 };
 
-export const dummyEmployeeDashboardData = {
+export const dummyStaffDashboardData = {
     currentMonthAttendance: 20,
     pendingLeaves: 2,
     latestPayslip: {
         netSalary: 45000,
     },
-    employee: {
-        firstName: "Aarav",
+    staff: {
+        firstName: "Jenny",
         lastName: "Sharma",
         position: "Staff Nurse",
         department: "ICU",
@@ -35,19 +35,19 @@ export const dummyEmployeeDashboardData = {
 
 export const dummyProfileData = {
     _id: "69b411e6f8a807df391d7b13",
-    firstName: "Aarav",
+    firstName: "Jenny",
     lastName: "Sharma",
     email: "aarav.sharma@hospital.com",
     image: null,
 };
 
-export const dummyEmployeeData = [
+export const dummyStaffData = [
     {
         _id: "hosp_001",
         userId: {
             _id: "hosp_user_001",
             email: "dr.ravi@hospital.com",
-            role: "EMPLOYEE",
+            role: "STAFF",
         },
         department: "Cardiology",
         firstName: "Dr. Ravi",
@@ -68,7 +68,7 @@ export const dummyEmployeeData = [
         id: "hosp_001",
         user: {
             email: "dr.ravi@hospital.com",
-            role: "EMPLOYEE",
+            role: "STAFF",
         },
     },
     {
@@ -76,7 +76,7 @@ export const dummyEmployeeData = [
         userId: {
             _id: "hosp_user_002",
             email: "nurse.meera@hospital.com",
-            role: "EMPLOYEE",
+            role: "STAFF",
         },
         department: "ICU",
         firstName: "Meera",
@@ -97,7 +97,7 @@ export const dummyEmployeeData = [
         id: "hosp_002",
         user: {
             email: "nurse.meera@hospital.com",
-            role: "EMPLOYEE",
+            role: "STAFF",
         },
     },
     {
@@ -105,7 +105,7 @@ export const dummyEmployeeData = [
         userId: {
             _id: "hosp_user_003",
             email: "tech.arjun@hospital.com",
-            role: "EMPLOYEE",
+            role: "STAFF",
         },
         department: "Radiology",
         firstName: "Arjun",
@@ -126,7 +126,7 @@ export const dummyEmployeeData = [
         id: "hosp_003",
         user: {
             email: "tech.arjun@hospital.com",
-            role: "EMPLOYEE",
+            role: "STAFF",
         },
     },
 ];
@@ -134,7 +134,7 @@ export const dummyEmployeeData = [
 export const dummyLeaveData = [
     {
         _id: "leave_001",
-        employeeId: "hosp_002",
+        staffId: "hosp_002",
         type: "CASUAL",
         startDate: "2026-03-27T00:00:00.000Z",
         endDate: "2026-03-29T00:00:00.000Z",
@@ -143,11 +143,11 @@ export const dummyLeaveData = [
         createdAt: "2026-03-13T13:51:22.716Z",
         updatedAt: "2026-03-13T13:51:43.139Z",
         id: "leave_001",
-        employee: dummyEmployeeData[1],
+        staff: dummyStaffData[1],
     },
     {
         _id: "leave_002",
-        employeeId: "hosp_001",
+        staffId: "hosp_001",
         type: "ANNUAL",
         startDate: "2026-03-23T00:00:00.000Z",
         endDate: "2026-03-24T00:00:00.000Z",
@@ -156,11 +156,11 @@ export const dummyLeaveData = [
         createdAt: "2026-03-13T13:50:52.117Z",
         updatedAt: "2026-03-13T13:51:46.450Z",
         id: "leave_002",
-        employee: dummyEmployeeData[0],
+        staff: dummyStaffData[0],
     },
     {
         _id: "leave_003",
-        employeeId: "hosp_003",
+        staffId: "hosp_003",
         type: "SICK",
         startDate: "2026-03-15T00:00:00.000Z",
         endDate: "2026-03-16T00:00:00.000Z",
@@ -169,14 +169,14 @@ export const dummyLeaveData = [
         createdAt: "2026-03-13T13:49:19.204Z",
         updatedAt: "2026-03-13T13:51:45.418Z",
         id: "leave_003",
-        employee: dummyEmployeeData[2],
+        staff: dummyStaffData[2],
     },
 ];
 
 export const dummyPayslipData = [
     {
         _id: "pay_001",
-        employeeId: "hosp_001",
+        staffId: "hosp_001",
         month: 2,
         year: 2026,
         basicSalary: 120000,
@@ -186,11 +186,11 @@ export const dummyPayslipData = [
         createdAt: "2026-03-13T13:48:05.653Z",
         updatedAt: "2026-03-13T13:48:05.653Z",
         id: "pay_001",
-        employee: dummyEmployeeData[0],
+        staff: dummyStaffData[0],
     },
     {
         _id: "pay_002",
-        employeeId: "hosp_002",
+        staffId: "hosp_002",
         month: 2,
         year: 2026,
         basicSalary: 45000,
@@ -200,11 +200,11 @@ export const dummyPayslipData = [
         createdAt: "2026-03-13T13:46:30.804Z",
         updatedAt: "2026-03-13T13:46:30.804Z",
         id: "pay_002",
-        employee: dummyEmployeeData[1],
+        staff: dummyStaffData[1],
     },
     {
         _id: "pay_003",
-        employeeId: "hosp_003",
+        staffId: "hosp_003",
         month: 2,
         year: 2026,
         basicSalary: 30000,
@@ -214,37 +214,32 @@ export const dummyPayslipData = [
         createdAt: "2026-03-13T13:46:14.884Z",
         updatedAt: "2026-03-13T13:46:14.884Z",
         id: "pay_003",
-        employee: dummyEmployeeData[2],
+        staff: dummyStaffData[2],
     },
 ];
 
 export const dummyAttendanceData = [
     {
         _id: "att_001",
-        employeeId: "hosp_001",
+        staffId: "hosp_001",
         date: "2026-03-14T18:30:00.000Z",
         checkIn: "2026-03-15T10:00:00.000Z",
         checkOut: "2026-03-15T18:00:00.000Z",
         status: "PRESENT",
         workingHours: 8,
         dayType: "Full Day",
-        createdAt: "2026-03-15T10:42:33.973Z",
-        updatedAt: "2026-03-15T10:42:37.479Z",
     },
     {
         _id: "att_002",
-        employeeId: "hosp_002",
+        staffId: "hosp_002",
         date: "2026-03-12T18:30:00.000Z",
         checkIn: "2026-03-13T13:00:00.000Z",
         checkOut: "2026-03-13T21:00:00.000Z",
         status: "PRESENT",
         workingHours: 8,
         dayType: "Full Day",
-        createdAt: "2026-03-13T13:48:41.418Z",
-        updatedAt: "2026-03-13T13:48:42.433Z",
     },
 ];
-
 
 export function getWorkingHoursDisplay(record) {
     if (record.workingHours != null) {
@@ -252,7 +247,7 @@ export function getWorkingHoursDisplay(record) {
         const mins = Math.round((record.workingHours - hrs) * 60);
         return `${hrs}h ${mins}m`;
     }
-   
+
     if (record.checkIn && !record.checkOut) {
         const diffMs = Date.now() - new Date(record.checkIn).getTime();
         const diffHours = diffMs / (1000 * 60 * 60);
