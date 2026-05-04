@@ -49,7 +49,7 @@ const Sidebar = () => {
             </div>
             <div>
               <p className="text-[13px] font-semibold text-slate-200 tracking-wide">CareSync</p>
-              <p className="text-[10px] text-slate-500 font-medium mt-0.5">Hospital Management</p>
+              <p className="text-[10px] text-slate-500 font-medium mt-0.5">Staff & Operations</p>
             </div>
           </div>
           <button aria-label="Close menu" onClick={() => setMobileMenu(false)}
@@ -75,7 +75,7 @@ const Sidebar = () => {
               <div className="flex items-center gap-1.5 mt-0.5">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#5dcaa5]"></div>
                 <p className="text-[10px] text-[#5dcaa5] font-medium">
-                  {role === "ADMIN" ? "Administrator" : "Staff"}
+                  {role === "ADMIN" ? "Admin Access" : "On Duty"}
                 </p>
               </div>
             </div>
@@ -139,7 +139,7 @@ const Sidebar = () => {
   return (
     <>
       
-      <button aria-label="Open menu" onClick={() => setMobileMenu(true)}
+      <button aria-label='open menu' onClick={() => setMobileMenu(true)}
         className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg shadow-lg"
         style={{ background: "#0b1f1a", border: "1px solid rgba(255,255,255,0.08)" }}>
         <MenuIcon size={18} className="text-white"/>

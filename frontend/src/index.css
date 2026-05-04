@@ -1,129 +1,71 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Outfit:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
 
-* {
-    font-family: "Outfit", "Inter";
-}
+* { font-family: "Outfit", sans-serif; }
 
 @layer utilities {
-    /* Card styles */
-    .card {
-        @apply bg-white rounded-lg border border-slate-200/70;
-    }
-    .card-hover {
-        @apply hover:-translate-y-0.5 transition-all duration-300;
-    }
+  .card {
+    @apply bg-white rounded-xl border border-[#e2ede8];
+  }
+  .card-hover {
+    @apply hover:-translate-y-0.5 transition-all duration-300 hover:shadow-lg hover:shadow-[#0d6b52]/8;
+  }
 
-    /* Button styles */
-    .btn-primary {
-        @apply bg-linear-to-r from-indigo-600 to-indigo-500 text-white px-5 py-2.5 rounded-md text-sm
-            hover:from-indigo-700 hover:to-indigo-600 transition-all duration-200 shadow-md shadow-indigo-500/25
-            active:scale-[0.98];
-    }
-    .btn-secondary {
-        @apply bg-white text-slate-700 border border-slate-200 px-5 py-2.5 rounded-md text-sm
-            hover:bg-slate-50 hover:border-slate-300 transition-all duration-200;
-    }
+  /* Green primary button */
+  .btn-primary {
+    @apply bg-[#0d6b52] text-white px-5 py-2.5 rounded-lg text-sm font-medium
+      hover:bg-[#0a4a3a] transition-all duration-200 active:scale-[0.98]
+      inline-flex items-center gap-2;
+  }
+  .btn-secondary {
+    @apply bg-white text-slate-700 border border-[#e2ede8] px-5 py-2.5 rounded-lg text-sm font-medium
+      hover:bg-[#f4f7f5] hover:border-[#c6e8dc] transition-all duration-200;
+  }
 
-    /* Input, Select, Textarea styles */
-    input,
-    select,
-    textarea {
-        @apply w-full px-4 py-2.5 bg-slate-50/50 border border-slate-200 rounded-md
-            focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400
-            transition-all duration-200 text-sm placeholder:text-slate-400;
-    }
+  input, select, textarea {
+    @apply w-full px-4 py-2.5 bg-[#f4f7f5] border border-[#e2ede8] rounded-lg
+      focus:outline-none focus:ring-2 focus:ring-[#0d6b52]/20 focus:border-[#0d6b52]
+      transition-all duration-200 text-sm placeholder:text-slate-400;
+  }
 
-    /* Table styles */
-    .table-modern {
-        @apply w-full text-left text-sm;
-    }
-    .table-modern thead {
-        @apply text-xs font-semibold text-slate-500 uppercase tracking-wider;
-    }
-    .table-modern thead th {
-        @apply px-6 py-4 bg-slate-50/80;
-    }
-    .table-modern tbody {
-        @apply divide-y divide-slate-100;
-    }
-    .table-modern tbody tr {
-        @apply hover:bg-slate-50/50 transition-colors duration-150;
-    }
-    .table-modern tbody td {
-        @apply px-6 py-4;
-    }
+  /* Page header */
+  .page-header { @apply mb-8; }
+  .page-title {
+    @apply text-2xl font-semibold text-[#0a2e24] tracking-tight flex items-center gap-2;
+  }
+  .page-title::before {
+    content: '';
+    @apply block w-[3px] h-6 rounded-sm bg-[#0d6b52];
+  }
+  .page-subtitle { @apply text-slate-500 text-sm mt-1 ml-[11px]; }
 
-    /* Badge styles */
-    .badge {
-        @apply inline-flex items-center px-2.5 py-1 rounded-md text-xs;
-    }
-    .badge-success {
-        @apply bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/10;
-    }
-    .badge-warning {
-        @apply bg-amber-50 text-amber-700 ring-1 ring-amber-600/10;
-    }
-    .badge-danger {
-        @apply bg-rose-50 text-rose-700 ring-1 ring-rose-600/10;
-    }
+  /* Table */
+  .table-modern { @apply w-full text-left text-sm; }
+  .table-modern thead { @apply text-xs font-semibold text-slate-500 uppercase tracking-wider; }
+  .table-modern thead th { @apply px-6 py-4 bg-[#f4f7f5]; }
+  .table-modern tbody { @apply divide-y divide-[#e2ede8]; }
+  .table-modern tbody tr { @apply hover:bg-[#f4f7f5]/60 transition-colors duration-150; }
+  .table-modern tbody td { @apply px-6 py-4; }
 
-    /* Page header */
-    .page-header {
-        @apply mb-8;
-    }
-    .page-title {
-        @apply text-2xl font-medium text-slate-900 tracking-tight;
-    }
-    .page-subtitle {
-        @apply text-slate-500 text-sm mt-1;
-    }
+  /* Badges */
+  .badge { @apply inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium; }
+  .badge-success { @apply bg-[#e8f5f0] text-[#0d6b52] ring-1 ring-[#0d6b52]/15; }
+  .badge-warning { @apply bg-amber-50 text-amber-700 ring-1 ring-amber-600/10; }
+  .badge-danger  { @apply bg-rose-50  text-rose-700  ring-1 ring-rose-600/10;  }
 
-    /* Animations */
-    .animate-fade-in {
-        animation: fadeIn 0.4s ease-out;
-    }
-    .animate-slide-up {
-        animation: slideUp 0.4s ease-out;
-    }
+  /* Animations */
+  .animate-fade-in  { animation: fadeIn  0.4s ease-out; }
+  .animate-slide-up { animation: slideUp 0.4s ease-out; }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* Main bg */
+body { background: #f4f7f5; }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    @apply bg-transparent;
-}
-::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 rounded-full;
-}
-::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-400;
-}
-
-/* Selection */
-::selection {
-    @apply bg-indigo-100 text-indigo-900;
-}
-
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { @apply bg-[#c6e8dc] rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-[#0d6b52]/40; }
+::selection { background: #e8f5f0; color: #0a2e24; }
