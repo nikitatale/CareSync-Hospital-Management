@@ -69,3 +69,5 @@ body { background: #f4f7f5; }
 ::-webkit-scrollbar-thumb { @apply bg-[#c6e8dc] rounded-full; }
 ::-webkit-scrollbar-thumb:hover { @apply bg-[#0d6b52]/40; }
 ::selection { background: #e8f5f0; color: #0a2e24; }
+
+
