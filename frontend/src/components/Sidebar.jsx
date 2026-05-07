@@ -20,7 +20,7 @@ const Sidebar = () => {
     setMobileMenu(false);
   }, [pathname]);
 
-  const role = "ADMIN" || "STAFF"
+  const role = "" || "STAFF"
 
   const navItems = [
     { name: "Dashboard",  href: "/dashboard", icon: LayoutGridIcon },
