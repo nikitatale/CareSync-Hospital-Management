@@ -22,11 +22,11 @@ const Staff = () => {
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-   },[])
+   },[selectDept])
 
    useEffect(() => {
     fetchStaffs();
-   }, [])
+   }, [fetchStaffs])
 
 
    const filtered = staffs.filter((emp) => `${emp.firstName} ${emp.lastName} ${emp.position}`.toLowerCase().includes(search.toLowerCase()))
