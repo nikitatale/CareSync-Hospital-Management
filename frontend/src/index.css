@@ -12,7 +12,7 @@
   }
 
   /* Green primary button */
-  .btn-primary {
+  .btn-primary { 
     @apply bg-[#0d6b52] text-white px-5 py-2.5 rounded-lg text-sm font-medium
       hover:bg-[#0a4a3a] transition-all duration-200 active:scale-[0.98]
       inline-flex items-center gap-2;

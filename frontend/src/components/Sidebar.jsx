@@ -28,7 +28,7 @@ const Sidebar = () => {
       ? { name: "Staff",      href: "/staffs",      icon: UserIcon }
       : { name: "Attendance", href: "/attendance",  icon: CalendarIcon },
     { name: "Leave",     href: "/leave",     icon: FileTextIcon },
-    { name: "Payslips",  href: "/payslips",  icon: DollarSignIcon },
+    { name: "Payroll Hub",  href: "/payslips",  icon: DollarSignIcon },
     { name: "Settings",  href: "/settings",  icon: SettingsIcon },
   ]
 
