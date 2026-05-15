@@ -20,6 +20,6 @@ const staffSchema = new mongoose.Schema({
 
 }, {timestamps: true});
 
-const Staff = mongoose.model.Staff || mongoose.model("Staff", staf);
+const Staff = mongoose.model.Staff || mongoose.model("Staff", staffSchema);
 
 export default Staff;
