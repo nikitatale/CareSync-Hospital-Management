@@ -9,6 +9,8 @@ import authRouter from "./routes/authRoutes.js";
 import staffRouter from "./routes/staffRoutes.js";
 import profileRouter from "./routes/profileRoutes.js";
 import attendanceRouter from "./routes/attendanceRoutes.js";
+import leaveRouter from "./routes/leaveRoutes.js";
+import payslipRouter from "./routes/payslipRoutes.js";
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 const app = express();
@@ -27,6 +29,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/staffs", staffRouter);
 app.use("/api/profile", profileRouter);
 app.use("/api/attendance", attendanceRouter);
+app.use("/api/leave", leaveRouter);
+app.use("/api/payslips", payslipRouter);
 
 
 await connectDb();
