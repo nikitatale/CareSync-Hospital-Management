@@ -87,7 +87,7 @@ const leaveApplicationRemainder  = inngest.createFunction(
 
 
 const attendanceRemainderCron  = inngest.createFunction(
-    {id: "attendance-remainder-cron", triggers: [{cron: "0 0 6 * * *"}]},
+    {id: "attendance-remainder-cron", triggers: [{cron: "TZ=Asia/Kolkata 30 11 * * *"}]},
     async({step}) => {
      const today = await step.run("get-today-date", () => {
         const startUTC =  new Date(new Date().toLocaleDateString("en-CA", {timeZone: "Asia/Kolkata"}) + "T00:00:00+05:30");
