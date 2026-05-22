@@ -2,6 +2,10 @@
 
 A full-stack web application for managing hospital staff operations including attendance tracking, leave management, payslip generation, and automated email reminders via background jobs.
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-apna--stay--eosin.vercel.app-brightgreen?style=for-the-badge)](https://care-sync-frontend-pi.vercel.app/login)
+[![GitHub](https://img.shields.io/badge/GitHub-nikitatale-black?style=for-the-badge&logo=github)](https://github.com/nikitatale/ApnaStay)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Nikita_Tale-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/nikita-tale)
+
 ---
 
 ## 📋 Table of Contents
@@ -380,4 +384,13 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
-> Built with ❤️ for streamlining hospital HR operations.
+## 👩‍💻 About the Developer
+
+**Nikita Tale** - Full-Stack Developer specializing in MERN Stack  
+Open to work! Let's connect →  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/nikita-tale)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?logo=github)](https://github.com/nikitatale)
+
+---
+
+> ⭐ If you found this project interesting, please star it - it helps a lot!
