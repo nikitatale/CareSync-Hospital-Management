@@ -1,10 +1,18 @@
 import { Pencil, Trash2Icon } from 'lucide-react'
 import { motion } from 'framer-motion'
+import api from '../api/axios';
+import toast from 'react-hot-toast';
 
 const StaffCard = ({ staffs, onDelete, onEdit, index = 0 }) => {
 
   const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this staff member?")) return;
+    try {
+      await api.delete(`/staffs/${staffs.id}`)
+      onDelete();
+    } catch (error) {
+      toast.error(error.response?.data?.error || error.message);
+    }
   }
 
   return (

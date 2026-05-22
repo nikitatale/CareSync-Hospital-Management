@@ -3,25 +3,32 @@ import { Link, useLocation } from 'react-router-dom'
 import { dummyProfileData } from '../assets/assets';
 import {
   CalendarIcon, ChevronRightIcon, DollarSignIcon,
-  FileTextIcon, LayoutGridIcon, LogOutIcon,
+  FileTextIcon, LayoutGridIcon, Loader2, LogOutIcon,
   MenuIcon, SettingsIcon, UserIcon, XIcon
 } from 'lucide-react';
+
+import {useAuth} from "../context/authContext";
+import api from '../api/axios';
 
 const Sidebar = () => {
   const { pathname } = useLocation();
   const [userName, setUserName] = useState("");
   const [mobileMenu, setMobileMenu] = useState(false);
 
+  const {user, loading, logout} = useAuth();
+
+
   useEffect(() => {
-    setUserName(dummyProfileData.firstName + " " + dummyProfileData.lastName);
+   api.get("/profile").then(({data}) => {
+    if(data.firstName) setUserName(`${data.firstName} ${data.lastName || ""}`.trim());
+   })
   }, []);
 
   useEffect(() => {
     setMobileMenu(false);
   }, [pathname]);
 
-  const role = "" || "STAFF"
-
+  const role = user?.role;
   const navItems = [
     { name: "Dashboard",  href: "/dashboard", icon: LayoutGridIcon },
     role === "ADMIN"
@@ -32,7 +39,10 @@ const Sidebar = () => {
     { name: "Settings",  href: "/settings",  icon: SettingsIcon },
   ]
 
-  const handleLogout = () => { window.location.href = "/login" }
+  const handleLogout = () => {
+    logout();
+     window.location.href = "/login"
+     }
 
   const sidebarContent = (
     <>
@@ -92,7 +102,14 @@ const Sidebar = () => {
 
       
       <div className="flex-1 px-2 space-y-0.5 overflow-y-auto">
-        {navItems.map((item) => {
+      {loading ?  (
+          <div className='px-3 py-3 flex items-center gap-2 text-slate-500'>
+           <Loader2 className='animate-spin w-4 h-4'/>
+           <span className='text-sm'>Loading...</span>
+          </div>
+      ) : (
+
+         navItems.map((item) => {
           const isActive = pathname.startsWith(item.href)
           return (
             <Link key={item.name} to={item.href}
@@ -118,7 +135,9 @@ const Sidebar = () => {
               )}
             </Link>
           )
-        })}
+        })
+      )}
+
       </div>
 
      

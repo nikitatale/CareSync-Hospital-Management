@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { format } from 'date-fns'
-import { Download, ReceiptText } from 'lucide-react'
+import { Download } from 'lucide-react'
 
 const PayslipList = ({ payslips, isAdmin }) => {
   return (
@@ -40,7 +40,7 @@ const PayslipList = ({ payslips, isAdmin }) => {
             {payslips.length === 0 ? (
               <tr>
                 <td colSpan={isAdmin ? 5 : 4} className='text-center py-16 text-slate-400'>
-                  No payslips generated yet — run your first payroll!
+                  No payslips generated yet - run your first payroll!
                 </td>
               </tr>
             ) : (

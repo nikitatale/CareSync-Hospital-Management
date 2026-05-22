@@ -1,6 +1,8 @@
 import { ArrowRightIcon } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useAuth } from "../context/authContext";
+import Loading from "./Loading";
 
 
 const container = {
@@ -26,6 +28,11 @@ const smoothFade = {
 
 const LoginRightSide = () => {
   const navigate = useNavigate();
+
+  const {user, loading} = useAuth();
+
+  if(loading) return <Loading/>
+  if(user) return <Navigate to="/"/>
 
   const roles = {
     admin: {
