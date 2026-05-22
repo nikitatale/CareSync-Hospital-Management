@@ -1,8 +1,8 @@
-# 🏥 CareSync — Hospital Staff Management System
+# CareSync - Hospital Staff Management System
 
 A full-stack web application for managing hospital staff operations including attendance tracking, leave management, payslip generation, and automated email reminders via background jobs.
 
-[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-apna--stay--eosin.vercel.app-brightgreen?style=for-the-badge)](https://care-sync-frontend-pi.vercel.app/login)
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-CareSync--eosin.vercel.app-brightgreen?style=for-the-badge)](https://care-sync-frontend-pi.vercel.app/login)
 [![GitHub](https://img.shields.io/badge/GitHub-nikitatale-black?style=for-the-badge&logo=github)](https://github.com/nikitatale/ApnaStay)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Nikita_Tale-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/nikita-tale)
 
