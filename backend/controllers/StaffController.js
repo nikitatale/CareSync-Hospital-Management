@@ -3,70 +3,144 @@ import bcrypt from "bcrypt";
 import User from "../models/User.js";
 
 
-
 export const getStaff = async (req, res) => {
     try {
         const {department} = req.query;
-        const where = {};
+        const where = { isDeleted: false }; 
         if(department) where.department = department;
 
-        const staffs = (await Staff.find(where)).toSorted({createdAt: -1}).populate("userId", "email role").lean();
+        
+        const staffs = await Staff.find(where)
+            .sort({ createdAt: -1 })
+            .populate("userId", "email role")
+            .lean();
 
         const result = staffs.map((staff) => ({
             ...staff,
             id: staff._id.toString(),
-            user: staff.userId ? {email: staff.userId, role: emp.userId.role} : null
+           
+            user: staff.userId ? {email: staff.userId.email, role: staff.userId.role} : null
         }))
 
         return res.json(result);
     } catch (error) {
+        console.error("Get staff error:", error); 
         return res.status(500).json({error: "Failed to fetch staffs"});
     }
 }
 
-export const createStaff = async(req, res) => {
-     try {
+// export const createStaff = async(req, res) => {
+//      try {
 
-        const {firstName, lastName, email, phone, position, department, basicSalary, allowances, deductions, joinDate, password, role, bio} = req.body;
+//         const {firstName, lastName, email, phone, position, department, basicSalary, allowances, deductions, joinDate, password, role, bio} = req.body;
 
-        if(!email || !password || !firstName || !lastName){
-            return res.status(400).json({error: "Missing required fields"})
-        }
+//         if(!email || !password || !firstName || !lastName){
+//             return res.status(400).json({error: "Missing required fields"})
+//         }
 
-        const hashed = await bcrypt.hash(password, 10);
-        const user = await User.create({
-            email,
-            password: hashed,
-            role: role || "STAFF"
-        })
+//         const hashed = await bcrypt.hash(password, 10);
+//         const user = await User.create({
+//             email,
+//             password: hashed,
+//             role: role || "STAFF"
+//         })
 
-        const staff = await Staff.create({
-            userId: user._id,
-            fisrtname,
-            lastName,
-            email,
-            phone, 
-            position, 
-            department: department || "NURSE",
-            basicSalary: Number(basicSalary) || 0,
-            allowances: Number(allowances) || 0,
-            deductions: Number(deductions) || 0,
-            joinDate: new Date(joinDate),
-            bio: bio || ""
-        })
+//        const staff = await Staff.create({
+//             userId: user._id,
+//             firstName,
+//             lastName,
+//             email,
+//             phone,
+//             position,
+//             department: department || "NURSE",
+//             basicSalary: Number(basicSalary) || 0,
+//             allowances: Number(allowances) || 0,
+//             deductions: Number(deductions) || 0,
+//             joinDate: new Date(joinDate),
+//             bio: bio || ""
+//         });
         
+//         return res.status(201).json({success:true, staff: staff})
 
-        return res.status(201).json({success:true, staff: staff})
+//     } catch (error) {
+//          if(error.code === 11000){
+//             return res.status(400).json({error: "Email already exists"});
+//          }
 
-    } catch (error) {
-         if(error.code === 11000){
-            return res.status(400).json({error: "Email already exists"});
-         }
+//          console.error("Create staff error", error)
+//          return res.status(500).json({error: "Failed to create staffs"});
+//     }
+// }
 
-         console.error("Create staff error", error)
-         return res.status(500).json({error: "Failed to create staffs"});
+
+export const createStaff = async (req, res) => {
+  try {
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      position,
+      department,
+      basicSalary,
+      allowances,
+      deductions,
+      joinDate,
+      password,
+      role,
+      bio,
+    } = req.body;
+
+    if (!email || !password || !firstName || !lastName) {
+      return res.status(400).json({
+        error: "Missing required fields",
+      });
     }
-}
+
+    // Check duplicate email
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).json({
+        error: "Email already exists",
+      });
+    }
+
+    const hashed = await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+      email,
+      password: hashed,
+      role: role || "STAFF",
+    });
+
+    const staff = await Staff.create({
+      userId: user._id,
+      firstName,
+      lastName,
+      email,
+      phone,
+      position,
+      department: department || "NURSE",
+      basicSalary: Number(basicSalary) || 0,
+      allowances: Number(allowances) || 0,
+      deductions: Number(deductions) || 0,
+      joinDate: joinDate ? new Date(joinDate) : new Date(),
+      bio: bio || "",
+    });
+
+    return res.status(201).json({
+      success: true,
+      staff,
+    });
+  } catch (error) {
+    console.error("Create staff error:", error);
+
+    return res.status(500).json({
+      error: error.message,
+    });
+  }
+};
 
 
 export const updateStaff = async(req, res) => {
@@ -82,22 +156,20 @@ export const updateStaff = async(req, res) => {
         return res.status(404).json({error: "Staff not found"})
        }
 
-        await Staff.findByIdAndUpdate(id, {
-            fisrtname,
+       await Staff.findByIdAndUpdate(id, {
+            firstName,
             lastName,
             email,
-            phone, 
-            position, 
+            phone,
+            position,
             department: department || "NURSE",
             basicSalary: Number(basicSalary) || 0,
             allowances: Number(allowances) || 0,
             deductions: Number(deductions) || 0,
             staffStatus: staffStatus || "ACTIVE",
             bio: bio || ""
-        })
+        });
         
-        // update user record
-
         const userUpdate = {email}
         if(role) userUpdate.role = role
         if(password) userUpdate.password = await bcrypt.hash(password, 10)
@@ -110,7 +182,6 @@ export const updateStaff = async(req, res) => {
             return res.status(400).json({error: "Email already exists"});
          }
 
-        
          return res.status(500).json({error: "Failed to update staffs"});
     }
 }
@@ -132,5 +203,3 @@ export const deleteStaff = async(req, res) => {
          return res.status(500).json({error: "Failed to delete staff"});
     }
 }
-
-

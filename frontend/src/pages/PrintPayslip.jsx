@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { dummyPayslipData } from "../assets/assets"
 import Loading from "../components/Loading"
 import { format } from "date-fns"
 import { motion } from "framer-motion"
 import { PrinterIcon } from "lucide-react"
+import api from "../api/axios"
 
 const PrintPayslip = () => {
   const { id } = useParams()
@@ -12,8 +12,7 @@ const PrintPayslip = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setPaySlip(dummyPayslipData.find((slip) => slip._id === id))
-    setTimeout(() => setLoading(false), 1000)
+     api.get(`/payslips/${id}`).then((res) => setPaySlip(res.data.result)).catch(console.error).finally(() => setLoading(false))
   }, [id])
 
   if (loading) return <Loading/>
@@ -21,7 +20,7 @@ const PrintPayslip = () => {
   if (!paySlip) return (
     <div className="min-h-screen bg-[#f4f7f5] flex items-center justify-center">
       <p className="text-slate-400 text-sm">
-        Payslip not found — it may have been removed or the link is invalid.
+        Payslip not found - it may have been removed or the link is invalid.
       </p>
     </div>
   )

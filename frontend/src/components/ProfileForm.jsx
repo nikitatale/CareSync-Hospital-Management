@@ -1,6 +1,8 @@
 import { Loader2, Save, User } from "lucide-react"
 import { useState } from "react"
 import { motion } from "framer-motion"
+import toast from "react-hot-toast"
+import api from "../api/axios"
 
 const ProfileForm = ({ initialData, onSuccess }) => {
   const [loading, setLoading] = useState(false)
@@ -9,7 +11,21 @@ const ProfileForm = ({ initialData, onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true);
+    setError("");
+    setMessage("");
+    const formData = new FormData(e.currentTarget)
+    try {
+      await api.post("/profile", formData)
+      setMessage("Profile updated successfully!");
+      onSuccess?.()
+    } catch (error) {
+      toast.error(error.response?.data?.error || error?.message)
+    } finally{
+      setLoading(false);
+    }
   }
+
 
   return (
     <form onSubmit={handleSubmit} className="card p-5 sm:p-6 mb-4">
@@ -75,7 +91,7 @@ const ProfileForm = ({ initialData, onSuccess }) => {
             </label>
             <input
               disabled
-              value={`${initialData.position}`}
+              value={initialData?.position ?? "No Position"}
               className="bg-[#f4f7f5] text-slate-400 cursor-not-allowed"/>
           </div>
         </div>

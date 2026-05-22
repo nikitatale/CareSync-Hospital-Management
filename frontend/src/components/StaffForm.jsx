@@ -2,15 +2,69 @@ import  { useState } from 'react'
 import {useNavigate} from "react-router-dom";
 import { DEPARTMENTS } from '../assets/assets';
 import { Loader2Icon } from 'lucide-react';
+import api from '../api/axios';
+import toast from 'react-hot-toast';
 
 const StaffForm = ({initialData, onSuccess, onCancel}) => {
 
     const navigate = useNavigate();
     const[loading, setLoading] = useState(false);
     const isEditMode = !!initialData;
-    const handleSubmit = async(e) => {
-        e.preventDefault();
+
+
+//     const handleSubmit = async(e) => {
+//         e.preventDefault();
+//         setLoading(true);
+//         const formData = new FormData(e.currentTarget);
+//         if(isEditMode){
+//             const pwd = formData.get("password")
+//             if(!pwd) formData.delete("password")
+//         }
+
+//         try {
+//             const url = isEditMode ? `/staffs/${initialData.id}` : "/staffs";
+//             const method = isEditMode ? "put" : "post"
+//             await api[method](url, formData)
+//             onSuccess ? onSuccess() : navigate("/staffs")
+//         } catch (error) {
+//             console.log("Frontend Error:", error.response?.data);
+//   toast.error(
+//     error.response?.data?.error ||
+//     error.response?.data?.message ||
+//     error.message
+//   );
+//         } finally{
+//             setLoading(false);
+//         }
+//     }
+
+const handleSubmit = async(e) => {
+    e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    
+    // FormData ko plain object mein convert karo
+    const data = Object.fromEntries(formData.entries());
+    
+    // Edit mode mein empty password delete karo
+    if(isEditMode && !data.password) delete data.password;
+
+    try {
+        const url = isEditMode ? `/staffs/${initialData.id}` : "/staffs";
+        const method = isEditMode ? "put" : "post";
+        await api[method](url, data);  // JSON bhejo, FormData nahi
+        onSuccess ? onSuccess() : navigate("/staffs");
+    } catch (error) {
+        console.log("Frontend Error:", error.response?.data);
+        toast.error(
+            error.response?.data?.error ||
+            error.response?.data?.message ||
+            error.message
+        );
+    } finally {
+        setLoading(false);
     }
+}
 
   return (
     <form onSubmit={handleSubmit} className='space-y-6 max-w-3xl animate-fade-in'>
@@ -128,7 +182,7 @@ const StaffForm = ({initialData, onSuccess, onCancel}) => {
                 <label className='block mb-2'>Role</label>
                 <select name='role' defaultValue={initialData?.user?.role || "STAFF"}>
                       <option value="STAFF">STAFF</option>
-                      <option value="EMPLOYEE">EMPLOYEE</option>
+                      <option value="ADMIN">ADMIN</option>
                 </select>
             </div>
 

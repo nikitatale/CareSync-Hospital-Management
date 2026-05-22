@@ -24,23 +24,30 @@ const staff = await Staff.findOne({userId: session.userId})
      }
 }
 
-
 export const updateProfile = async(req, res) => {
    try {
 
     const session = req.session;
-    const staff = await Staff.findOne({userId: session.userId})
-    if(!staff) return res.status(404).json({error: "Staff not found"});
+
+    const staff = await Staff.findOne({ userId: session.userId });
+
+    if(!staff){
+      return res.status(404).json({ error: "Staff not found" });
+    }
 
     if(staff.isDeleted){
-        return res.status(403).json({error: "Your account is deactivated. You cannot update your profile"})
+      return res.status(403).json({
+        error: "Your account is deactivated. You cannot update your profile"
+      });
     }
-     
-    await staff.findByIdAndUpdate(staff._id, {bio: req.body.bio})
 
-    return res.json({success: true});
+    staff.bio = req.body.bio;
+
+    await staff.save();
+
+    return res.json({ success: true, staff });
 
    } catch (error) {
-    return res.status(500).json({error: "Failed to Update profile"});
+      return res.status(500).json({ error: "Failed to Update profile" });
    }   
 }
