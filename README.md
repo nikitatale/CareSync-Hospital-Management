@@ -21,7 +21,7 @@ A full-stack web application for managing hospital staff operations including at
 
 ## Overview
 
-**CareSync** is a role-based Hospital Staff Management System designed to streamline HR operations for hospitals. It supports two user roles — **Admin** and **Staff** — each with a dedicated dashboard. The system automates critical workflows like attendance reminders, checkout alerts, and leave approval notifications using Inngest background jobs.
+**CareSync** is a role-based Hospital Staff Management System designed to streamline HR operations for hospitals. It supports two user roles - **Admin** and **Staff** - each with a dedicated dashboard. The system automates critical workflows like attendance reminders, checkout alerts, and leave approval notifications using Inngest background jobs.
 
 ---
 
@@ -46,7 +46,7 @@ A full-stack web application for managing hospital staff operations including at
 ### 🤖 Automated Background Jobs
 - **Auto Check-Out**: If a staff member forgets to check out, a reminder email is sent after 9 hours; attendance is auto-closed as Half Day after 10 hours
 - **Leave Reminder**: Admin is notified by email if a leave application remains pending for more than 24 hours
-- **Daily Attendance Cron**: Runs at 11:30 AM IST every day — identifies absent staff (excluding those on approved leave) and sends reminder emails
+- **Daily Attendance Cron**: Runs at 11:30 AM IST every day - identifies absent staff (excluding those on approved leave) and sends reminder emails
 
 ---
 
