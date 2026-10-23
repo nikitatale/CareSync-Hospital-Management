@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: caresync-config
+data:
+  PORT: "8080"
+  MONGO_URI: mongodb://mongo:27017/caresync
+  INNGEST_DEV: "1"
+  INNGEST_BASE_URL: http://inngest:8288

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inngest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inngest
+  template:
+    metadata:
+      labels:
+        app: inngest
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: inngest
+          image: inngest/inngest
+          command: ["inngest", "dev", "-u", "http://backend:8080/api/inngest"]
+          ports:
+            - containerPort: 8288
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inngest
+spec:
+  selector:
+    app: inngest
+  ports:
+    - port: 8288
+      targetPort: 8288

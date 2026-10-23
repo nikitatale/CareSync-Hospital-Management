@@ -1,0 +1,46 @@
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+  inngest:
+    image: inngest/inngest
+    command: inngest dev -u http://backend:8080/api/inngest
+    ports:
+      - "8288:8288"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      # override .env value: use local mongo - atlas
+      MONGO_URI: mongodb://mongo:27017/caresync
+      # use local dev server - inngest cloud
+      INNGEST_DEV: "1"
+      INNGEST_BASE_URL: http://inngest:8288
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_BASE_URL: http://localhost:8080
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
