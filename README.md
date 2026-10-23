@@ -374,6 +374,36 @@ Make sure to add all environment variables in the Vercel project settings dashbo
 
 ---
 
+## 🐳 Docker & Kubernetes
+
+The app can also run locally with Docker Compose or on a minikube cluster.
+
+### Docker Compose
+Runs the frontend (nginx), backend, MongoDB and the Inngest Dev Server.
+
+    docker compose up --build
+    docker compose exec backend npm run seed
+
+App: http://localhost:3000 | Inngest dashboard: http://localhost:8288
+
+### Kubernetes (minikube)
+Manifests are in `/k8s` (Deployments, Services, ConfigMap, Secret, PVC).
+
+    minikube start --driver=docker
+    docker build -t caresync-backend ./backend
+    docker build -t caresync-frontend --build-arg VITE_BASE_URL=http://localhost:8080 ./frontend
+    minikube image load caresync-backend:latest
+    minikube image load caresync-frontend:latest
+    cp k8s/secret.yaml.example k8s/secret.yaml   # then add real values
+    kubectl apply -f k8s/
+    kubectl exec deploy/backend -- npm run seed
+    kubectl port-forward svc/backend 8080:8080
+    kubectl port-forward svc/frontend 3000:80
+
+Note: the frontend reads `VITE_BASE_URL` at build time, so it is passed as a Docker build argument.
+
+---
+
 ## 📄 License
 
 This project is open-source and available under the [MIT License](LICENSE).
